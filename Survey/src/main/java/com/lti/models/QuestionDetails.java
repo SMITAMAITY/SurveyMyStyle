@@ -6,9 +6,11 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -54,13 +56,19 @@ public class QuestionDetails {
 //
 //
 //	//bi-directional one-to-one association to QuestionType
-//	@OneToOne(mappedBy="questionsDetail", fetch=FetchType.LAZY, cascade= CascadeType.ALL)
-//	private QuestionType questionType;
+	@OneToOne
+	private QuestionType questionType;
+//	
+
 
 	//bi-directional many-to-one association to UserFeedbackDetail
 	@OneToMany(targetEntity=UserFeedbackDetails.class, cascade=CascadeType.ALL)
 	@JoinColumn(name="question_id",referencedColumnName="questionDetailsId")
 	private List<UserFeedbackDetails> userFeedbackDetails;
+	
+	@OneToMany(targetEntity=AnswerDetails.class, cascade=CascadeType.ALL)
+	@JoinColumn(name="question_id",referencedColumnName="questionDetailsId")
+	private List<AnswerDetails> answerDetails;
 
 	public int getQuestionDetailsId() {
 		return questionDetailsId;
@@ -142,6 +150,14 @@ public class QuestionDetails {
 		this.updatedTime = updatedTime;
 	}
 
+	public QuestionType getQuestionType() {
+		return questionType;
+	}
+
+	public void setQuestionType(QuestionType questionType) {
+		this.questionType = questionType;
+	}
+
 	public List<UserFeedbackDetails> getUserFeedbackDetails() {
 		return userFeedbackDetails;
 	}
@@ -150,8 +166,13 @@ public class QuestionDetails {
 		this.userFeedbackDetails = userFeedbackDetails;
 	}
 
+	public List<AnswerDetails> getAnswerDetails() {
+		return answerDetails;
+	}
 
-
+	public void setAnswerDetails(List<AnswerDetails> answerDetails) {
+		this.answerDetails = answerDetails;
+	}
 
 	public QuestionDetails() {
 		super();
@@ -160,7 +181,8 @@ public class QuestionDetails {
 
 	public QuestionDetails(int questionDetailsId, Date createdDate, Time createdTime, int formId, String isactive,
 			String questionDescription, int questionSeqNo, int questionTypeId, Date updateDate, Time updatedTime,
-			List<UserFeedbackDetails> userFeedbackDetails) {
+			QuestionType questionType, List<UserFeedbackDetails> userFeedbackDetails,
+			List<AnswerDetails> answerDetails) {
 		super();
 		this.questionDetailsId = questionDetailsId;
 		this.createdDate = createdDate;
@@ -172,7 +194,9 @@ public class QuestionDetails {
 		this.questionTypeId = questionTypeId;
 		this.updateDate = updateDate;
 		this.updatedTime = updatedTime;
+		this.questionType = questionType;
 		this.userFeedbackDetails = userFeedbackDetails;
+		this.answerDetails = answerDetails;
 	}
 
 	@Override
@@ -181,8 +205,17 @@ public class QuestionDetails {
 				+ ", createdTime=" + createdTime + ", formId=" + formId + ", isactive=" + isactive
 				+ ", questionDescription=" + questionDescription + ", questionSeqNo=" + questionSeqNo
 				+ ", questionTypeId=" + questionTypeId + ", updateDate=" + updateDate + ", updatedTime=" + updatedTime
-				+ ", userFeedbackDetails=" + userFeedbackDetails + "]";
+				+ ", questionType=" + questionType + ", userFeedbackDetails=" + userFeedbackDetails + ", answerDetails="
+				+ answerDetails + "]";
 	}
+
+	
+	
+	
+
+	
+	
+	
 
 	
 

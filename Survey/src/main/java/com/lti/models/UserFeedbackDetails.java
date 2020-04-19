@@ -31,6 +31,14 @@ public class UserFeedbackDetails {
 	//@JoinColumn(name ="registration_id", referencedColumnName="userId")
 //	private Registration registration;
 
+	@ManyToOne
+	@JoinColumn(name="question_id",referencedColumnName="questionDetailsId")
+	private QuestionDetails questionDetails;
+	
+	@ManyToOne
+	@JoinColumn(name="answer_id",referencedColumnName="answerId")
+	private AnswerDetails answerDetails;
+
 	public int getUserFeedbackDetailsId() {
 		return userFeedbackDetailsId;
 	}
@@ -79,13 +87,21 @@ public class UserFeedbackDetails {
 		this.updatedTime = updatedTime;
 	}
 
-//	public Registration getRegistration() {
-//		return registration;
-//	}
-//
-//	public void setRegistration(Registration registration) {
-//		this.registration = registration;
-//	}
+	public QuestionDetails getQuestionDetails() {
+		return questionDetails;
+	}
+
+	public void setQuestionDetails(QuestionDetails questionDetails) {
+		this.questionDetails = questionDetails;
+	}
+
+	public AnswerDetails getAnswerDetails() {
+		return answerDetails;
+	}
+
+	public void setAnswerDetails(AnswerDetails answerDetails) {
+		this.answerDetails = answerDetails;
+	}
 
 	public UserFeedbackDetails() {
 		super();
@@ -93,7 +109,7 @@ public class UserFeedbackDetails {
 	}
 
 	public UserFeedbackDetails(int userFeedbackDetailsId, Date createdDate, Time createdTime, String isActive,
-			Date updatedDate, Time updatedTime) {
+			Date updatedDate, Time updatedTime, QuestionDetails questionDetails, AnswerDetails answerDetails) {
 		super();
 		this.userFeedbackDetailsId = userFeedbackDetailsId;
 		this.createdDate = createdDate;
@@ -101,15 +117,18 @@ public class UserFeedbackDetails {
 		this.isActive = isActive;
 		this.updatedDate = updatedDate;
 		this.updatedTime = updatedTime;
-		//this.registration = registration;
+		this.questionDetails = questionDetails;
+		this.answerDetails = answerDetails;
 	}
 
 	@Override
 	public String toString() {
 		return "UserFeedbackDetails [userFeedbackDetailsId=" + userFeedbackDetailsId + ", createdDate=" + createdDate
 				+ ", createdTime=" + createdTime + ", isActive=" + isActive + ", updatedDate=" + updatedDate
-				+ ", updatedTime=" + updatedTime + "]";
+				+ ", updatedTime=" + updatedTime + ", questionDetails=" + questionDetails + ", answerDetails="
+				+ answerDetails + "]";
 	}
+	
 
 	
 	
