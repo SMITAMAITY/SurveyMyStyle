@@ -2,6 +2,7 @@ package com.lti.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,16 @@ public class QuestionDetailsServiceImpl implements IQuestionDetailsService {
 		iQuestionDetailsRepository.save(questionDetails);
 		
 	}
+	
+	//Find the player
+	public QuestionDetails getQuestion(int id) {
+		Optional<QuestionDetails> question = iQuestionDetailsRepository.findById(id);
+			if(question.isPresent()) {
+				return question.get();
+			}
+		
+		return null;
+	}
+	
 
 }

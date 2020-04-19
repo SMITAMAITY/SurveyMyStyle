@@ -9,4 +9,6 @@ public interface IQuestionDetailsService {
 	
 	
 	public void addQuestionDetails(QuestionDetails questionDetails);
+	
+
 }
