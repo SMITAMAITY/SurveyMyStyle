@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.lti.models.UserFeedbackDetails;
 import com.lti.repository.IUserFeedbackDetailsRepository;
+import com.lti.repository.IUserFeedbackDetailsRepositoryOne;
 import com.lti.services.IUserFeedbackDetailsService;
 
 @Service
@@ -16,11 +17,14 @@ public class UserFeedbackDetailsService implements IUserFeedbackDetailsService {
 	@Autowired
 	private IUserFeedbackDetailsRepository iUserFeedbackDetailsRepository;
 	
+	@Autowired
+	private IUserFeedbackDetailsRepositoryOne iUserFeedbackDetailsRepositoryOne;
+	
 	@Override
 	public List<UserFeedbackDetails> findAllDetails() {
 		List<UserFeedbackDetails> users = new ArrayList<>();
-		iUserFeedbackDetailsRepository.findAll().forEach(users::add);
-		return users;
+		return iUserFeedbackDetailsRepositoryOne.readAllUserFeedbackDetails();
+		
 	}
 
 	@Override

@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -16,13 +18,13 @@ import javax.persistence.Table;
 public class Registration {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
 
 	private String companyName;
 
 	private String countryRegion;
 
-//	@Temporal(TemporalType.DATE)
 	private Date createdDate;
 
 	private Time createdTime;
@@ -37,21 +39,10 @@ public class Registration {
 
 	private int totalUserOrg;
 
-//	@Temporal(TemporalType.DATE)
 	private Date updatedDate;
 
 	private Time updatedTime;
-	
-	@OneToMany(targetEntity=UserFeedbackDetails.class, cascade=CascadeType.ALL)
-	@JoinColumn(name="id",referencedColumnName="userId")
-	private List<UserFeedbackDetails> userFeedbackDetails;
 
-	
-//	@OneToMany(targetEntity=UserFeedbackDetails.class, cascade=CascadeType.ALL)
-//	@JoinColumn(name="id",referencedColumnName="userId")
-//	private List<UserFeedbackDetails> userFeedbackDetails;
-	
-	
 	public int getUserId() {
 		return userId;
 	}
@@ -148,22 +139,22 @@ public class Registration {
 		this.updatedTime = updatedTime;
 	}
 
-	public List<UserFeedbackDetails> getUserFeedbackDetails() {
-		return userFeedbackDetails;
-	}
-
-	public void setUserFeedbackDetails(List<UserFeedbackDetails> userFeedbackDetails) {
-		this.userFeedbackDetails = userFeedbackDetails;
-	}
-
 	public Registration() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String toString() {
+		return "Registration [userId=" + userId + ", companyName=" + companyName + ", countryRegion=" + countryRegion
+				+ ", createdDate=" + createdDate + ", createdTime=" + createdTime + ", email=" + email + ", fullName="
+				+ fullName + ", isActive=" + isActive + ", jobRole=" + jobRole + ", totalUserOrg=" + totalUserOrg
+				+ ", updatedDate=" + updatedDate + ", updatedTime=" + updatedTime + "]";
+	}
+
 	public Registration(int userId, String companyName, String countryRegion, Date createdDate, Time createdTime,
 			String email, String fullName, String isActive, String jobRole, int totalUserOrg, Date updatedDate,
-			Time updatedTime, List<UserFeedbackDetails> userFeedbackDetails) {
+			Time updatedTime) {
 		super();
 		this.userId = userId;
 		this.companyName = companyName;
@@ -177,20 +168,17 @@ public class Registration {
 		this.totalUserOrg = totalUserOrg;
 		this.updatedDate = updatedDate;
 		this.updatedTime = updatedTime;
-		this.userFeedbackDetails = userFeedbackDetails;
 	}
 
-	@Override
-	public String toString() {
-		return "Registration [userId=" + userId + ", companyName=" + companyName + ", countryRegion=" + countryRegion
-				+ ", createdDate=" + createdDate + ", createdTime=" + createdTime + ", email=" + email + ", fullName="
-				+ fullName + ", isActive=" + isActive + ", jobRole=" + jobRole + ", totalUserOrg=" + totalUserOrg
-				+ ", updatedDate=" + updatedDate + ", updatedTime=" + updatedTime + ", userFeedbackDetails="
-				+ userFeedbackDetails + "]";
-	}
+//	
+//	@OneToMany(targetEntity=UserFeedbackDetails.class, cascade=CascadeType.ALL)
+//	@JoinColumn(name="user_id",referencedColumnName="userId")
+//	private List<UserFeedbackDetails> userFeedbackDetails;
+
 	
 
 
+	
 	
 	
 }

@@ -1,5 +1,7 @@
 package com.lti.repository;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import com.lti.models.QuestionDetails;

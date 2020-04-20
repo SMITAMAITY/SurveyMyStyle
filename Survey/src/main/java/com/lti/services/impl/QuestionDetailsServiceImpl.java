@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.lti.models.QuestionDetails;
 import com.lti.repository.IQuestionDetailsRepository;
+import com.lti.repository.IQuestionDetailsRepositoryOne;
 import com.lti.services.IQuestionDetailsService;
 
 @Service
@@ -16,13 +17,15 @@ public class QuestionDetailsServiceImpl implements IQuestionDetailsService {
 
 	@Autowired
 	private IQuestionDetailsRepository iQuestionDetailsRepository;
+	@Autowired
+	private IQuestionDetailsRepositoryOne iQuestionDetailsRepositoryOne;
 	
 
 	@Override
 	public List<QuestionDetails> findAllQuestionDetails() {
 		List<QuestionDetails> users = new ArrayList<>();
-		iQuestionDetailsRepository.findAll().forEach(users::add);
-		return users;
+		return iQuestionDetailsRepositoryOne.readAllQuestionDetails();
+		
 	}
 
 	@Override

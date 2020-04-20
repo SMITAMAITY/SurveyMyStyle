@@ -2,12 +2,13 @@ package com.lti.models;
 
 import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,19 +34,13 @@ public class QuestionType {
 
 	private Time updatedTime;
 
-	//bi-directional one-to-one association to DynamicQuestion
-//	@OneToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name="question_type_id")
-//	private DynamicQuestion dynamicQuestion;
-
-	//bi-directional one-to-one association to QuestionsDetail
-//	@OneToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name="question_type_id",referencedColumnName="questionTypeId")
-//	private QuestionDetails questionDetails;
 	
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="question_type_id")
-	private QuestionDetails questionDetails;
+	@OneToMany(targetEntity=QuestionDetails.class, cascade=CascadeType.ALL)
+	@JoinColumn(name="question_type_id",referencedColumnName="questionTypeId")
+	private List<QuestionDetails> questionDetails;
+//	
+//	@OneToMany(mappedBy="questionType")
+//	private List<QuestionDetails> questionDetails;
 
 	public int getQuestionTypeId() {
 		return questionTypeId;
@@ -103,11 +98,11 @@ public class QuestionType {
 		this.updatedTime = updatedTime;
 	}
 
-	public QuestionDetails getQuestionDetails() {
+	public List<QuestionDetails> getQuestionDetails() {
 		return questionDetails;
 	}
 
-	public void setQuestionDetails(QuestionDetails questionDetails) {
+	public void setQuestionDetails(List<QuestionDetails> questionDetails) {
 		this.questionDetails = questionDetails;
 	}
 
@@ -117,7 +112,7 @@ public class QuestionType {
 	}
 
 	public QuestionType(int questionTypeId, Date createdDate, Time createdTime, String isActive,
-			String questionTypeDescription, Date updatedDate, Time updatedTime, QuestionDetails questionDetails) {
+			String questionTypeDescription, Date updatedDate, Time updatedTime, List<QuestionDetails> questionDetails) {
 		super();
 		this.questionTypeId = questionTypeId;
 		this.createdDate = createdDate;
@@ -136,6 +131,9 @@ public class QuestionType {
 				+ ", updatedDate=" + updatedDate + ", updatedTime=" + updatedTime + ", questionDetails="
 				+ questionDetails + "]";
 	}
+	
+	
+	
 	
 	
 

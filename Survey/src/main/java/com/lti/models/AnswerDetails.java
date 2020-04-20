@@ -8,7 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,10 +18,7 @@ public class AnswerDetails {
 	@Id
 	private int answerId;
 
-
 	private String answerDescription;
-
-
 
 	private Date createdDate;
 
@@ -30,36 +27,9 @@ public class AnswerDetails {
 
 	private String isActive;
 
-
-	private String questionType;
-
-
 	private Date updatedDate;
 
 	private Time updatedTime;
-
-	//bi-directional many-to-one association to DynamicQuestion
-//	@ManyToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name="question_details_id")
-//	private DynamicQuestion dynamicQuestion;
-
-	//bi-directional many-to-one association to QuestionsDetail
-//	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-//	@JoinColumn(name="question_details_id")
-//	private QuestionsDetail questionsDetail;
-	
-
-	//bi-directional many-to-one association to UserFeedbackDetail
-//	@OneToMany(mappedBy="answerDetail")
-//	private List<UserFeedbackDetail> userFeedbackDetails;
-
-	@OneToMany(targetEntity=UserFeedbackDetails.class, cascade=CascadeType.ALL)
-	@JoinColumn(name="answer_id",referencedColumnName="answerId")
-	private List<UserFeedbackDetails> userFeedbackDetails;
-	
-//	@ManyToOne(targetEntity=QuestionDetails.class, cascade=CascadeType.ALL)
-//	@JoinColumn(name="answer_id",referencedColumnName="answerId")
-//	private List<QuestionDetails> questionDetails;
 
 	public int getAnswerId() {
 		return answerId;
@@ -101,14 +71,6 @@ public class AnswerDetails {
 		this.isActive = isActive;
 	}
 
-	public String getQuestionType() {
-		return questionType;
-	}
-
-	public void setQuestionType(String questionType) {
-		this.questionType = questionType;
-	}
-
 	public Date getUpdatedDate() {
 		return updatedDate;
 	}
@@ -125,49 +87,35 @@ public class AnswerDetails {
 		this.updatedTime = updatedTime;
 	}
 
-	public List<UserFeedbackDetails> getUserFeedbackDetails() {
-		return userFeedbackDetails;
-	}
-
-	public void setUserFeedbackDetails(List<UserFeedbackDetails> userFeedbackDetails) {
-		this.userFeedbackDetails = userFeedbackDetails;
-	}
-
-//	public List<QuestionDetails> getQuestionDetails() {
-//		return questionDetails;
-//	}
-//
-//	public void setQuestionDetails(List<QuestionDetails> questionDetails) {
-//		this.questionDetails = questionDetails;
-//	}
-
 	public AnswerDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public AnswerDetails(int answerId, String answerDescription, Date createdDate, Time createdTime, String isActive,
-			String questionType, Date updatedDate, Time updatedTime, List<UserFeedbackDetails> userFeedbackDetails) {
+			Date updatedDate, Time updatedTime) {
 		super();
 		this.answerId = answerId;
 		this.answerDescription = answerDescription;
 		this.createdDate = createdDate;
 		this.createdTime = createdTime;
 		this.isActive = isActive;
-		this.questionType = questionType;
 		this.updatedDate = updatedDate;
 		this.updatedTime = updatedTime;
-		this.userFeedbackDetails = userFeedbackDetails;
-//		this.questionDetails = questionDetails;
 	}
 
 	@Override
 	public String toString() {
 		return "AnswerDetails [answerId=" + answerId + ", answerDescription=" + answerDescription + ", createdDate="
-				+ createdDate + ", createdTime=" + createdTime + ", isActive=" + isActive + ", questionType="
-				+ questionType + ", updatedDate=" + updatedDate + ", updatedTime=" + updatedTime
-				+ ", userFeedbackDetails=" + userFeedbackDetails + "]";
+				+ createdDate + ", createdTime=" + createdTime + ", isActive=" + isActive + ", updatedDate="
+				+ updatedDate + ", updatedTime=" + updatedTime + "]";
 	}
+
 	
+//	@ManyToOne
+//	@JoinColumn(name="question_id")
+//	private QuestionDetails questionDetails;
+
+
 	
 }

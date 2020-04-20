@@ -2,11 +2,11 @@ package com.lti.models;
 import java.sql.Date;
 import java.sql.Time;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,6 +14,10 @@ import javax.persistence.Table;
 public class UserFeedbackDetails {
 	@Id
 	private int userFeedbackDetailsId;
+	
+	private int questionDetailsId;
+	
+	private int answerId;
 
 //	@Temporal(TemporalType.DATE)
 	private Date createdDate;
@@ -27,17 +31,7 @@ public class UserFeedbackDetails {
 
 	private Time updatedTime;
 	
-//	@OneToOne
-	//@JoinColumn(name ="registration_id", referencedColumnName="userId")
-//	private Registration registration;
-
-	@ManyToOne
-	@JoinColumn(name="question_id",referencedColumnName="questionDetailsId")
-	private QuestionDetails questionDetails;
-	
-	@ManyToOne
-	@JoinColumn(name="answer_id",referencedColumnName="answerId")
-	private AnswerDetails answerDetails;
+	private String email;
 
 	public int getUserFeedbackDetailsId() {
 		return userFeedbackDetailsId;
@@ -45,6 +39,22 @@ public class UserFeedbackDetails {
 
 	public void setUserFeedbackDetailsId(int userFeedbackDetailsId) {
 		this.userFeedbackDetailsId = userFeedbackDetailsId;
+	}
+
+	public int getQuestionDetailsId() {
+		return questionDetailsId;
+	}
+
+	public void setQuestionDetailsId(int questionDetailsId) {
+		this.questionDetailsId = questionDetailsId;
+	}
+
+	public int getAnswerId() {
+		return answerId;
+	}
+
+	public void setAnswerId(int answerId) {
+		this.answerId = answerId;
 	}
 
 	public Date getCreatedDate() {
@@ -87,20 +97,12 @@ public class UserFeedbackDetails {
 		this.updatedTime = updatedTime;
 	}
 
-	public QuestionDetails getQuestionDetails() {
-		return questionDetails;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setQuestionDetails(QuestionDetails questionDetails) {
-		this.questionDetails = questionDetails;
-	}
-
-	public AnswerDetails getAnswerDetails() {
-		return answerDetails;
-	}
-
-	public void setAnswerDetails(AnswerDetails answerDetails) {
-		this.answerDetails = answerDetails;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public UserFeedbackDetails() {
@@ -108,30 +110,37 @@ public class UserFeedbackDetails {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserFeedbackDetails(int userFeedbackDetailsId, Date createdDate, Time createdTime, String isActive,
-			Date updatedDate, Time updatedTime, QuestionDetails questionDetails, AnswerDetails answerDetails) {
+	public UserFeedbackDetails(int userFeedbackDetailsId, int questionDetailsId, int answerId, Date createdDate,
+			Time createdTime, String isActive, Date updatedDate, Time updatedTime, String email) {
 		super();
 		this.userFeedbackDetailsId = userFeedbackDetailsId;
+		this.questionDetailsId = questionDetailsId;
+		this.answerId = answerId;
 		this.createdDate = createdDate;
 		this.createdTime = createdTime;
 		this.isActive = isActive;
 		this.updatedDate = updatedDate;
 		this.updatedTime = updatedTime;
-		this.questionDetails = questionDetails;
-		this.answerDetails = answerDetails;
+		this.email = email;
 	}
 
 	@Override
 	public String toString() {
-		return "UserFeedbackDetails [userFeedbackDetailsId=" + userFeedbackDetailsId + ", createdDate=" + createdDate
-				+ ", createdTime=" + createdTime + ", isActive=" + isActive + ", updatedDate=" + updatedDate
-				+ ", updatedTime=" + updatedTime + ", questionDetails=" + questionDetails + ", answerDetails="
-				+ answerDetails + "]";
+		return "UserFeedbackDetails [userFeedbackDetailsId=" + userFeedbackDetailsId + ", questionDetailsId="
+				+ questionDetailsId + ", answerId=" + answerId + ", createdDate=" + createdDate + ", createdTime="
+				+ createdTime + ", isActive=" + isActive + ", updatedDate=" + updatedDate + ", updatedTime="
+				+ updatedTime + ", email=" + email + "]";
 	}
 	
+	
+//	@ManyToOne
+//	@JoinColumn(name="user_id")
+//	private Registration registration;
 
-	
-	
-	
+
+
+
+
+
 	
 }
